@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "antd";
 import styled from "styled-components";
 import SigninBg from "../component/SigninBg";
+import SigninForm from "../component/SigninForm";
 
 const Page = styled(Row).attrs(() => ({
     type: "flex",
@@ -12,6 +13,7 @@ const Page = styled(Row).attrs(() => ({
 
 const Content = styled.div`
     width: 800px;
+    height: 700px;
     margin-right: auto;
     margin-left: auto;
 `;
@@ -56,7 +58,7 @@ export default function Signin() {
                     <Underline />
                     <SigninArea>
                         <SigninBg />
-                        {/* <SigninForm>2</SigninForm> */}
+                        <SigninForm />
                     </SigninArea>
                 </Content>
             </Col>
