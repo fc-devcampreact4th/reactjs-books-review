@@ -49,7 +49,7 @@ const SigninArea = styled(Row)``;
 export default function Signin() {
     return (
         <Page>
-            <Col span={24} style={{ height: "100px" }}>
+            <Col span={24}>
                 <Content>
                     <Title>MARKTUBE REVIEW SERVICE FOR BOOKS</Title>
                     <Subtitle>
