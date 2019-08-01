@@ -60,26 +60,25 @@ class CreateBookForm extends React.Component {
 
             const config = {
                 headers: {
-                    Authorization: "Bearer " + token,
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/x-www-form-urlencoded"
-                },
+                }
+            };
+
+            const params = {
                 title: title,
                 message: description,
                 author: author,
                 url: url
             };
 
-            const param = {
-                title: title,
-                message: description,
-                author: author,
-                url: url
-            };
-
-            console.log(config);
-            console.log(param);
-            await axios.post("https://api.marktube.tv/v1/book", config);
-            history.push("/");
+            const response = await axios.post(
+                "https://api.marktube.tv/v1/book",
+                params,
+                config
+            );
+            console.log(response.data);
+            // history.push("/");
         } catch (error) {
             console.log(error);
         }
