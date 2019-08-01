@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Button, Input, Col, message } from "antd";
 import * as axios from "axios";
 import { Link, withRouter } from "react-router-dom";
-import { async } from "q";
 
 const { TextArea } = Input;
 
@@ -55,30 +54,25 @@ class CreateBookForm extends React.Component {
         const author = this._authorInput.current.state.value;
         const url = this._urlInput.current.state.value;
 
+        const token = localStorage.getItem("token");
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
+        const params = {
+            title: title,
+            message: description,
+            author: author,
+            url: url
+        };
+
         try {
-            const token = localStorage.getItem("token");
+            await axios.post("https://api.marktube.tv/v1/book", params, config);
 
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/x-www-form-urlencoded"
-                }
-            };
-
-            const params = {
-                title: title,
-                message: description,
-                author: author,
-                url: url
-            };
-
-            const response = await axios.post(
-                "https://api.marktube.tv/v1/book",
-                params,
-                config
-            );
-            console.log(response.data);
-            // history.push("/");
+            history.push("/");
         } catch (error) {
             console.log(error);
         }

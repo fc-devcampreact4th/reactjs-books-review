@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "antd";
 import * as axios from "axios";
 
 function Book(props) {
@@ -34,9 +35,36 @@ export default class Home extends React.Component {
             <div>
                 <h1>Home</h1>
                 {books.map(book => (
-                    <Book {...book} key={book.bookId} />
+                    <div>
+                        <Book {...book} key={book.bookId} />
+                        <Button
+                            type="danger"
+                            onClick={() => this._click(book.bookId)}
+                        >
+                            삭제
+                        </Button>
+                    </div>
                 ))}
             </div>
         );
     }
+
+    _click = async bookId => {
+        const token = localStorage.getItem("token");
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
+        try {
+            await axios.delete(
+                `https://api.marktube.tv/v1/book/${bookId}`,
+                config
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
 }
